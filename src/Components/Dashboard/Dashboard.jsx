@@ -96,13 +96,14 @@ function Dashboard() {
                    })
                }}/>
                </FormGroup>
-               <Button type="submit" variant="contained" onSubmit={(e)=>{
+               <Button type="submit"  onClick={(e)=>{
                    e.preventDefault()
+                   
                dispatch(filterHandler({
                    filterValues:{
                 ...checkedValues     
                }}))
-               console.log('clicked')
+               
                }}>Submit</Button>
            </Paper>
     )
