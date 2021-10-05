@@ -1,6 +1,7 @@
 .sidenav {
   display: flex;
   flex-direction: column;
+  position: fixed;
 }
 
 .sidenav > div {
@@ -9,6 +10,19 @@
   align-items: center;
   margin-top: 33px;
 }
+.sidenav > div:hover {
+  border-left: 3px solid #ed1c24;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
 .sidenav > div svg {
-  font-size: 50px;
+  font-size: 30px;
+}
+.sidenav h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+.sidenav > div:hover {
+  color: rgb(180, 124, 233);
 }

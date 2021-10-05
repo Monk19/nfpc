@@ -75,7 +75,7 @@ function App() {
       <Grid xs={1.5} className="nav-tab">
         <Sidenav />
       </Grid>
-      <Grid xs={8}>
+      <Grid xs={10.5} className="nav-content">
         <h2>This is Nav Content display</h2>
       </Grid>
     </Grid>

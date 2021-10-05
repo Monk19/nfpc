@@ -19,11 +19,11 @@ img.appstek-logo {
   background-color: #ffffff !important;
 }
 .nav-tab {
-  border: 2px solid black;
+  /* border: 2px solid black; */
   height: 100vh;
 }
 div.search-icons {
-  display: flex;  
+  display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   gap: 27px;
@@ -36,4 +36,8 @@ div.search-icons {
 .search-icon {
   color: black;
   background-color: black;
+}
+.nav-content {
+  background-color: #eeeeee;
+  width: 100%;
 }

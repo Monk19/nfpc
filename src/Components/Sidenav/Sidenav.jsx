@@ -8,7 +8,7 @@ export default function Sidenav(props) {
   return (
     <div className="sidenav">
       <div>
-        <DashboardIcon />
+        <DashboardIcon className="nav-icont-c" />
         <h3>Dashboard</h3>
       </div>
 
