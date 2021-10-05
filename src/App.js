@@ -46,7 +46,7 @@ function App() {
     <Grid container className="App">
       <Grid item xs={12} sx={{ border: "2px solid black", height: "100px" }}>
         <AppBar className="top-grid">
-          <div>
+          <div className="logos">
             <img
               src={appsteklogo}
               alt="appstek-logo"
@@ -72,10 +72,10 @@ function App() {
           </div>
         </AppBar>
       </Grid>
-      <Grid xs={1.5} className="nav-tab">
+      <Grid xs={1.4} className="nav-tab">
         <Sidenav />
       </Grid>
-      <Grid xs={10.5} className="nav-content">
+      <Grid xs={10.6} className="nav-content">
         <h2>This is Nav Content display</h2>
       </Grid>
     </Grid>

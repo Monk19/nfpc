@@ -1,6 +1,7 @@
 .App {
   /* text-align: center; */
 }
+
 img.nfpc-logo {
   width: 69px;
   height: 44px;
@@ -9,6 +10,9 @@ img.appstek-logo {
   width: 99px;
   height: 44px;
   border-right: 2px solid black;
+}
+div.logos {
+  width: 100%;
 }
 .MuiPaper-root {
   display: flex !important;

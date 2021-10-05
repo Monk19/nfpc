@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 33px;
+  width: 11.3vw;
 }
 .sidenav > div:hover {
   border-left: 3px solid #ed1c24;
@@ -20,8 +21,9 @@
   font-size: 30px;
 }
 .sidenav h3 {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 16px;
+  font-family: "";
+  font-weight: 300;
 }
 .sidenav > div:hover {
   color: rgb(180, 124, 233);
