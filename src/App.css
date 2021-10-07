@@ -12,7 +12,7 @@ img.appstek-logo {
   border-right: 2px solid black;
 }
 div.logos {
-  width: 100%;
+  width: 70%;
 }
 .MuiPaper-root {
   display: flex !important;
@@ -36,10 +36,12 @@ div.search-icons {
 }
 .search-icons > svg {
   font-size: 30px;
+  color: #111111;
+  opacity: 0.8;
 }
 .search-icon {
-  color: black;
-  background-color: black;
+  /* color: black; */
+  /* background-color: black; */
 }
 .nav-content {
   background-color: #eeeeee;
