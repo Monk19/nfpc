@@ -1,23 +1,25 @@
-.form{
-    margin:10px 0px 0px 10px;
-    height:179px;
-    /* width:100vw; */
+.form {
+  margin: 10px 0px 0px 10px;
+  height: 179px;
+  /* width:100vw; */
 }
-.MuiCalendarPicker-root{
-    background-color: rgba(247, 244, 242, 0.808);
-    box-shadow: 10px 10px 20px black;
-    margin-left:200px;
-
+.MuiCalendarPicker-root {
+  background-color: rgba(247, 244, 242, 0.808);
+  box-shadow: 10px 10px 20px black;
+  margin-left: 200px;
 }
-.MuiOutlinedInput-root{
-    width: 80%;
+.MuiOutlinedInput-root {
+  width: 80%;
 }
-.checks{
-    display: flex;
-    flex-direction: column;
-    justify-content: stretch;
-    width:200px;
+.MuiFormGroup-root {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
 }
 /* .checks>label{
 
 } */
+.bar-chart {
+  height: 65vh;
+  margin: 5px 0px 0px 0px;
+}
