@@ -10,7 +10,8 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import PowerSettingsNewOutlinedIcon from "@mui/icons-material/PowerSettingsNewOutlined";
 import Sidenav from "./Components/Sidenav/Sidenav";
 import SearchIcon from "@mui/icons-material/Search";
-import Dashboard from '../src/Components/Dashboard/Dashboard'
+import Dashboard from "../src/Components/Dashboard/Dashboard";
+import DefectLogTables from "./Components/DefectLogTables";
 const useStyles = makeStyles({
   searchStyles: {
     border: "1px solid #E2E0E1",
@@ -77,8 +78,7 @@ function App() {
         <Sidenav />
       </Grid>
       <Grid xs={10.6} className="nav-content">
-      
-      <Dashboard/>
+        <Dashboard />
       </Grid>
     </Grid>
   );
