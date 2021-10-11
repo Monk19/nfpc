@@ -22,25 +22,31 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { filterHandler } from "../../features/filter/filterSlice";
 import "./Dashboard.modules.css";
 function Dashboard() {
-  const [value, setValue] = useState({ fromd: "", tod: "" });
-  const [checkedValues, setCheckedValues] = useState({
-    fromDate: "",
-    toDate: "",
-    type1: "",
-    type2: "",
-    Scratch: "",
-    Discoloration: "",
-    ForeignParticle: "",
-    All: "",
-  });
-  const filterConditions = useSelector((state) => state.filter);
+
+    const [value,setValue] = useState({fromd:"",tod:""})
+    const filterConditions = useSelector((state) => state.filter);
+    const [checkedValues,setCheckedValues] =useState({
+        fromDate:"",
+        toDate:"",
+        type1:"",
+        type2:"",
+        Scratch:"",
+        Discoloration:"",
+        ForeignParticle:"",
+        All:""
+    })
+    const dispatch = useDispatch()
+  
   const [table, setTable] = useState(true);
   const changeToTableHandler = () => {
-    console.log("Clicked");
     setTable(!table);
-    axios.get("/data").then((res) => console.log(res));
   };
-  const dispatch = useDispatch();
+  const applyFilterHandler = (e)=>{
+    
+    dispatch(filterHandler({ ...checkedValues }));
+    console.log(checkedValues);
+    axios.get('/data').then(res=>console.log(res))
+  }
   return (
     <Grid container xs={12}>
       <Grid xs={12}>
@@ -136,12 +142,7 @@ function Dashboard() {
           </FormGroup>
           <Button
             type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-
-              dispatch(filterHandler({ ...checkedValues }));
-              console.log(checkedValues);
-            }}
+            onClick={applyFilterHandler}
           >
             Submit
           </Button>
