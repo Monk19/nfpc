@@ -10,13 +10,13 @@ const initialState = {
     All:""
 }
 export const filterSlice = createSlice({
-    name:"filter",
+    name:"filtering",
     initialState,
     reducers:{
         filterHandler:(state,action)=>{
             console.log(state)
             return{
-            ...action.filtervalues
+            ...action.payload
         }
         }
     }

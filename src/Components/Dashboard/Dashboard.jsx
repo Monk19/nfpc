@@ -9,6 +9,7 @@ import { filterHandler} from '../../features/filter/filterSlice';
 import './Dashboard.modules.css'
 function Dashboard() {
     const [value,setValue] = useState({fromd:"",tod:""})
+    const conditionHandler = (state)=> state.filter
     const [checkedValues,setCheckedValues] =useState({
         fromDate:"",
         toDate:"",
@@ -18,7 +19,6 @@ function Dashboard() {
         Discoloration:"",
         ForeignParticle:"",
         All:""
-
     })
     const dispatch = useDispatch()
     return (
@@ -99,10 +99,7 @@ function Dashboard() {
                <Button type="submit"  onClick={(e)=>{
                    e.preventDefault()
                    
-               dispatch(filterHandler({
-                   filterValues:{
-                ...checkedValues     
-               }}))
+               dispatch(filterHandler({payload:{...checkedValues}}))
                
                }}>Submit</Button>
            </Paper>
