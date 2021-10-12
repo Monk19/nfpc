@@ -10,17 +10,15 @@ const initialState = {
   All: "",
 };
 export const filterSlice = createSlice({
-
-name: "filtering",
-initialState,
-reducers: {
-  filterHandler: (state, action) => {
-      console.log(action.payload)
-    return { ...action.payload };
+  name: "filtering",
+  initialState,
+  reducers: {
+    filterHandler: (state, action) => {
+      console.log(action.payload);
+      return { ...action.payload };
+    },
   },
-},
 });
-export const {filterHandler} = filterSlice.actions
-
+export const { filterHandler } = filterSlice.actions;
 
 export default filterSlice.reducer;

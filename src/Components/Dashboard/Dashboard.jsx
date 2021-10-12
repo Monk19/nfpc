@@ -20,33 +20,35 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 // import { yellow } from '@mui/material/colors'
 import { filterHandler } from "../../features/filter/filterSlice";
+import { defectSettingHandler } from "../../features/DatesettingSlice";
 import "./Dashboard.modules.css";
 function Dashboard() {
+  const [value, setValue] = useState({ fromd: "", tod: "" });
+  const filterConditions = useSelector((state) => state.filter);
+  const [checkedValues, setCheckedValues] = useState({
+    fromDate: "",
+    toDate: "",
+    type1: "",
+    type2: "",
+    Scratch: "",
+    Discoloration: "",
+    ForeignParticle: "",
+    All: "",
+  });
+  const dispatch = useDispatch();
 
-    const [value,setValue] = useState({fromd:"",tod:""})
-    const filterConditions = useSelector((state) => state.filter);
-    const [checkedValues,setCheckedValues] =useState({
-        fromDate:"",
-        toDate:"",
-        type1:"",
-        type2:"",
-        Scratch:"",
-        Discoloration:"",
-        ForeignParticle:"",
-        All:""
-    })
-    const dispatch = useDispatch()
-  
   const [table, setTable] = useState(true);
   const changeToTableHandler = () => {
     setTable(!table);
   };
-  const applyFilterHandler = (e)=>{
-    
+  const applyFilterHandler = (e) => {
     dispatch(filterHandler({ ...checkedValues }));
     console.log(checkedValues);
-    axios.get('/data').then(res=>console.log(res))
-  }
+    axios.get("/data").then((res) => {
+      const [typea, typeb] = res.data;
+      dispatch(defectSettingHandler({ typeA: typea, typeB: typeb }));
+    });
+  };
   return (
     <Grid container xs={12}>
       <Grid xs={12}>
@@ -140,10 +142,7 @@ function Dashboard() {
               }}
             />
           </FormGroup>
-          <Button
-            type="submit"
-            onClick={applyFilterHandler}
-          >
+          <Button type="submit" onClick={applyFilterHandler}>
             Submit
           </Button>
         </Paper>
@@ -156,13 +155,13 @@ function Dashboard() {
       </Grid>
       {table ? (
         <>
-          <Grid xs={2}>
+          <Grid xs={3}>
             <Paper className="bar-chart">
               <PieChart />
             </Paper>
           </Grid>
-          <Grid xs={4}>
-            <Paper className="bar-chart">
+          <Grid xs={3}>
+            <Paper className="pie-chart bar-chart">
               <LineChart />
             </Paper>
           </Grid>
