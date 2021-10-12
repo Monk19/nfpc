@@ -4,21 +4,34 @@ import { useSelector } from "react-redux";
 
 const PieChart = () => {
   const defectTypeAndCount = useSelector((state) => state.dataset.typeA);
-  const [currentData, setCurrentDate] = useState(defectTypeAndCount);
+  const selectedfilterValues = useSelector((state) => state.filter)
+  
+  const selFilterValues = [];
+  for (const [key,value] of Object.entries(selectedfilterValues)){
+    if(value==="on"){
+      selFilterValues.push(key)
+    }
+  }
   const [label, setlabel] = useState([]);
   const [piecount, setPieCount] = useState([]);
   const [pieDatae, setPieDatae] = useState({});
+  
 
-  const relo = () => {
+console.log(defectTypeAndCount)
+
+  const relo = () => {   
     const lble = [];
     const dta = [];
     const l = defectTypeAndCount.map((ele) => {
-      lble.push(ele.Defecttype);
-      dta.push(ele.count);
-      setlabel(lble);
-      setPieCount(dta);
+      if(selFilterValues.includes(ele.Defecttype)){
+        dta.push(ele.count);
+        lble.push(ele.Defecttype);
+        setlabel((prev)=>[...prev,lble])
+        setPieCount(dta);
+        console.log(ele.Defecttype)
+      }
     });
-
+    
     setPieDatae({
       labels: label,
       datasets: [

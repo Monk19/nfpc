@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DynamicChart from "../DynamicChart";
 import { Bar, Pie } from "react-chartjs-2";
@@ -28,11 +28,11 @@ function Dashboard() {
   const [checkedValues, setCheckedValues] = useState({
     fromDate: "",
     toDate: "",
-    type1: "",
-    type2: "",
-    Scratch: "",
+    typeA: "",
+    typeB: "",
+    Scratches: "",
     Discoloration: "",
-    ForeignParticle: "",
+    'Foreign Particles': "",
     All: "",
   });
   const dispatch = useDispatch();
@@ -44,11 +44,26 @@ function Dashboard() {
   const applyFilterHandler = (e) => {
     dispatch(filterHandler({ ...checkedValues }));
     console.log(checkedValues);
-    axios.get("/data").then((res) => {
+  
+  };
+  useEffect(()=>{
+  axios.get("/data").then((res) => {
       const [typea, typeb] = res.data;
       dispatch(defectSettingHandler({ typeA: typea, typeB: typeb }));
     });
+  console.log("executed")
+  const config = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    }
   };
+
+  // axios.post('/data/filter',{filterString:"",queryParams:[]},config).then(res=>{
+  //   console.log(res)
+  // }).catch(err=>console.error(err))
+  },[])
+
   return (
     <Grid container xs={12}>
       <Grid xs={12}>
@@ -108,7 +123,7 @@ function Dashboard() {
               label="Scratch"
               onChange={(e) => {
                 setCheckedValues((prev) => {
-                  return { ...prev, Scratch: e.target.value };
+                  return { ...prev, Scratches: e.target.value };
                 });
               }}
             />
@@ -118,7 +133,7 @@ function Dashboard() {
               onChange={(e) => {
                 console.log(e);
                 setCheckedValues((prev) => {
-                  return { ...prev, ForeignParticl: e.target.value };
+                  return { ...prev, 'Foreign Particles': e.target.value };
                 });
               }}
             />
@@ -155,13 +170,13 @@ function Dashboard() {
       </Grid>
       {table ? (
         <>
-          <Grid xs={3}>
-            <Paper className="bar-chart">
+          <Grid xs={2}>
+            <Paper className="bar-chart " >
               <PieChart />
             </Paper>
           </Grid>
-          <Grid xs={3}>
-            <Paper className="pie-chart bar-chart">
+          <Grid xs={4}>
+            <Paper className=" bar-chart">
               <LineChart />
             </Paper>
           </Grid>
