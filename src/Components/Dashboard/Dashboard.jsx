@@ -35,6 +35,14 @@ function Dashboard() {
     'Foreign Particles': "",
     All: "",
   });
+const defectTypes_Count =useSelector(state => state.dataset.typeA)
+console.log(defectTypes_Count)
+  const config = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    }
+  };
   const dispatch = useDispatch();
 
   const [table, setTable] = useState(true);
@@ -42,8 +50,14 @@ function Dashboard() {
     setTable(!table);
   };
   const applyFilterHandler = (e) => {
-    dispatch(filterHandler({ ...checkedValues }));
+    dispatch(filterHandler({...checkedValues}));
     console.log(checkedValues);
+    
+    axios.post('/data/filter',checkedValues,config).then(res=>{
+      console.log(res.data)
+      dispatch(defectSettingHandler({ typeA:res.data}));
+    })
+   
   
   };
   useEffect(()=>{
@@ -52,12 +66,6 @@ function Dashboard() {
       dispatch(defectSettingHandler({ typeA: typea, typeB: typeb }));
     });
   console.log("executed")
-  const config = {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-    }
-  };
 
   // axios.post('/data/filter',{filterString:"",queryParams:[]},config).then(res=>{
   //   console.log(res)
@@ -99,19 +107,19 @@ function Dashboard() {
             Bottle Types
             <FormControlLabel
               control={<Checkbox />}
-              label="Type 1"
+              label="TypeA"
               onChange={(e) => {
                 setCheckedValues((prev) => {
-                  return { ...prev, type1: e.target.value };
+                  return { ...prev, typeA: e.target.value };
                 });
               }}
             />
             <FormControlLabel
               control={<Checkbox />}
-              label="Type 2"
+              label="TypeB"
               onChange={(e) => {
                 setCheckedValues((prev) => {
-                  return { ...prev, type2: e.target.value };
+                  return { ...prev, typeB: e.target.value };
                 });
               }}
             />
@@ -165,7 +173,7 @@ function Dashboard() {
 
       <Grid xs={6}>
         <Paper className="bar-chart" onClick={changeToTableHandler}>
-          <DynamicChart />
+        <DynamicChart />
         </Paper>
       </Grid>
       {table ? (

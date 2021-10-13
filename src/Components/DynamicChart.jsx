@@ -1,60 +1,50 @@
-import React,{useState,useEffect} from "react";
-import { Bar } from "react-chartjs-2";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
 
-const GroupedBar = () => {
-  const defectTypeAndCount = useSelector((state) => state.dataset.typeA);
-  const selectedfilterValues = useSelector((state) => state.filter)
-  
-  const selFilterValues = [];
-  for (const [key,value] of Object.entries(selectedfilterValues)){
-    if(value==="on"){
-      selFilterValues.push(key)
-    }
-  }
-  const [label, setlabel] = useState([]);
-  const [piecount, setPieCount] = useState([]);
-  const [cDatae, setCDatae] = useState({});
-
-const dyData=()=>{
-
-  const lble = [];
-  const dta = [];
-  const l = defectTypeAndCount.map((ele) => {
-    if(selFilterValues.includes(ele.Defecttype)){
-      dta.push(ele.count);
-      lble.push(ele.Defecttype);
-      setlabel((prev)=>[...prev,lble])
-      setPieCount(dta);
-      console.log(ele.Defecttype)
-    }
-  });
-  const data = {
-    labels: label,
-    datasets: "",
-  };
-}
-  
-  
-  const options = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
+const data = {
+  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
       ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
     },
-  };
-  useEffect(()=>{
-    dyData()
-  },[])
-  
-  return(
+  ],
+};
+
+const options = {
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: true,
+        },
+      },
+    ],
+  },
+};
+
+const VerticalBar = () => (
   <>
+    
     <Bar data={data} options={options} />
   </>
-)}
+);
 
-export default GroupedBar;
+export default VerticalBar;

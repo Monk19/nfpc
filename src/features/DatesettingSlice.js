@@ -10,7 +10,6 @@ const dataSlice = createSlice({
       defectSettingHandler: (state, action) => {
       return {
         typeA: action.payload.typeA,
-        typeB: action.payload.typeB,
       };
     },
   },
