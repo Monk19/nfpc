@@ -1,35 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 
-const data = {
-  labels: ["1", "2", "3", "4", "5", "6"],
-  datasets: [
-    {
-      label: "Broken",
-      data: [12, 19, 3, 5, 2, 3],
-      fill: false,
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgba(255, 99, 132, 0.2)",
-    },
-  ],
-};
 
-const options = {
-  scales: {
-    yAxes: [
+const LineChart = () => {
+  const defectTypesAndCount = useSelector(state => state.dataset.typeA)
+  const lables = []
+  const dataset = []
+  const clrs= []
+   defectTypesAndCount.map((ele,index)=>{
+    lables.push(ele.Defecttype)
+    dataset.push(ele.count)
+  })
+  const data = {
+    labels: lables,
+    datasets: [
       {
-        ticks: {
-          beginAtZero: true,
-        },
+        label: "Defect type and count",
+        data: dataset,
+        fill: false,
+        backgroundColor: "rgb(255, 99, 132)",
+        borderColor: "rgba(255, 9, 136, 0.6)",
       },
     ],
-  },
-};
-
-const LineChart = () => (
+  };
+  
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  };
+  return(
   <>
     <Line data={data} options={options} />
   </>
-);
+  )
+};
 
 export default LineChart;

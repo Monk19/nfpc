@@ -130,6 +130,7 @@ console.log(defectTypes_Count)
               control={<Checkbox />}
               label="Scratch"
               onChange={(e) => {
+                console.log(e.target.value)
                 setCheckedValues((prev) => {
                   return { ...prev, Scratches: e.target.value };
                 });
