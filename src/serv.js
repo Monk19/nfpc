@@ -43,137 +43,138 @@ app.get("/data", (req, res) => {
 
 app.post('/data/filter',(req,res)=>{
   let filters = []
+  console.log(filters)
   for(const[key,value] of Object.entries(req.body)){
     if(value){
       filters.push(key)
     }
   }
   if(filters.includes("typeA")&&filters.includes("typeB")&&filters.includes("All")){
-      const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? OR Bottletype=?  GROUP BY Defecttype;`;
+      const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? OR Bottletype=?  GROUP BY Defecttype;`;
       db.all(sql,["typeA","typeB"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+       
       })
   }else if(filters.includes("typeA")&&filters.includes("typeB")&&filters.includes("Scratches")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? OR Bottletype=?  GROUP BY Defecttype Having Defecttype=?;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? OR Bottletype=?  GROUP BY Defecttype Having Defecttype=?;`;
       db.all(sql,["typeA","typeB","Scratches"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+        
       })
   }else if(filters.includes("typeA")&&filters.includes("typeB")&&filters.includes("Discoloration")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? OR Bottletype=?  GROUP BY Defecttype Having Defecttype=?;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? OR Bottletype=?  GROUP BY Defecttype Having Defecttype=?;`;
       db.all(sql,["typeA","typeB","Discoloration"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+        
       })
   }
   else if(filters.includes("typeA")&&filters.includes("typeB")&&filters.includes("Foreign Particles")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? OR Bottletype=? GROUP BY Defecttype Having Defecttype=?;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? OR Bottletype=? GROUP BY Defecttype Having Defecttype=?;`;
       db.all(sql,["typeA","typeB","Foreign Particles"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+       
       })
   }
   else if(filters.includes("typeA")&&filters.includes("All")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype `;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype `;
       db.all(sql,["typeA","All"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+        
       })
   }
   else if(filters.includes("typeA")&&filters.includes("All")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count  FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype;`;
       db.all(sql,["typeA"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+        
       })
   }
   else if(filters.includes("typeA")&&filters.includes("Scratches")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
       db.all(sql,["typeA","Scratches"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+        
       })
   }
   else if(filters.includes("typeA")&&filters.includes("Discoloration")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
       db.all(sql,["typeA","Discoloration"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+       
       })
   }
   else if(filters.includes("typeA")&&filters.includes("Foreign Particles")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
       db.all(sql,["typeA","Foreign Particles"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+       
       })
   }
   else if(filters.includes("typeB")&&filters.includes("All")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype;`;
       db.all(sql,["typeB"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+       
       })
   }
   else if(filters.includes("typeB")&&filters.includes("Scratches")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
       db.all(sql,["typeB","Scratches"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+        
       })
   }
   else if(filters.includes("typeB")&&filters.includes("Discoloration")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
       db.all(sql,["typeB","Discoloration"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+       
       })
   }
   else if(filters.includes("typeB")&&filters.includes("Foreign Particles")){
-    const sql = `SELECT Defecttype ,COUNT(*) FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
+    const sql = `SELECT Defecttype ,COUNT(*) AS count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype HAVING Defecttype=?;`;
       db.all(sql,["typeB","Foreign Particles"],(err,rows)=>{
         if(err){
           console.log(err)
         }
         res.send(rows)
-        filters = []
+        
       })
   }
   // if(filters.includes("fromDate")&&filters.includes("toDate")&&filters.includes("typeA")&&filters.includes("All")){
