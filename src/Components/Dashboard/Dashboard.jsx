@@ -59,10 +59,10 @@ function Dashboard() {
     });
   };
   useEffect(() => {
-    // axios.get("/data").then((res) => {
-    //     const [typea, typeb] = res.data;
-    //     dispatch(defectSettingHandler({ typeA: typea, typeB: typeb }));
-    //   });
+    axios.get("/data").then((res) => {
+        const [typea, typeb] = res.data;
+        dispatch(defectSettingHandler({ typeA: typea, typeB: typeb }));
+      });
     // console.log("executed")
     // axios.post('/data/filter',{filterString:"",queryParams:[]},config).then(res=>{
     //   console.log(res)

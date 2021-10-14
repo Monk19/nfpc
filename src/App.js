@@ -14,6 +14,7 @@ import Dashboard from "../src/Components/Dashboard/Dashboard";
 import DefectLogTables from "./Components/DefectLogTables";
 import { BrowserRouter as Router,Switch,Route } from "react-router-dom";
 import Modelstatuslist from "./Model/Modelstatuslist";
+import Login from "./login/Login";
 import Helper from "./Components/Helper"
 const useStyles = makeStyles({
   searchStyles: {
@@ -89,7 +90,7 @@ function App() {
         <Modelstatuslist/>
         </Route>
         <Route path="/help">
-        <Helper/>
+        <Login/>
         </Route>
       </Grid>
       </Router>
