@@ -10,7 +10,7 @@ const PieChart = () => {
   const lables = []
   const dataset = []
   const clrs= []
-  const x = defectTypesAndCount.map((ele,index)=>{
+  defectTypesAndCount.map((ele,index)=>{
     lables.push(ele.Defecttype)
     dataset.push(ele.count)
   })

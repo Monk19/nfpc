@@ -12,6 +12,10 @@ import Sidenav from "./Components/Sidenav/Sidenav";
 import SearchIcon from "@mui/icons-material/Search";
 import Dashboard from "../src/Components/Dashboard/Dashboard";
 import DefectLogTables from "./Components/DefectLogTables";
+import { BrowserRouter as Router,Switch,Route } from "react-router-dom";
+import Modelstatuslist from "./Model/Modelstatuslist";
+import Login from "./login/Login";
+import Helper from "./Components/Helper"
 const useStyles = makeStyles({
   searchStyles: {
     border: "1px solid #E2E0E1",
@@ -74,12 +78,22 @@ function App() {
           </div>
         </AppBar>
       </Grid>
+      <Router>
       <Grid xs={1.4} className="nav-tab">
         <Sidenav />
       </Grid>
       <Grid xs={10.6} className="nav-content">
+      <Route exact={true} path="/">
         <Dashboard />
+        </Route>
+        <Route path="/Configuration">
+        <Modelstatuslist/>
+        </Route>
+        <Route path="/help">
+        <Login/>
+        </Route>
       </Grid>
+      </Router>
     </Grid>
   );
 }
