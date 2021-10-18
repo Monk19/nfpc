@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 // import {ReactComponent as Logo} from '../../assets/instagram.svg'
 import appsteklogo from "./appsteklogo.svg";
 import nfpclogo from "./nfpclogo.png";
@@ -7,6 +8,7 @@ import "./Login.css";
 const  Login  = (props) => {
   const [email, setemail] =useState("");
   const [pwd, setpwd] = useState("");
+  const [isLogged,setisLogged] = useState(false)
    
 
 
@@ -19,7 +21,7 @@ const  Login  = (props) => {
   // }, [])
 
 
-      const handleSubmit = (e) => {
+      // const handleSubmit = (e) => {
  
  
     //    // Send POST request to 'books/create' endpoint
@@ -31,13 +33,19 @@ const  Login  = (props) => {
     //   })
     //   .then(res => {
     //     console.log(res.data)
-        e.preventDefault();
-        props.isLogin(true);
+        // e.preventDefault();
+        // props.isLogin(true);
         // Fetch all books to refresh
         // the books on the bookshelf list
       
       // })
       // .catch(error => console.error(`invalid credentials`))
+  // };
+  const config = {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    },
   };
 
 const sumbitAcessesHandler=(e)=>{
@@ -47,15 +55,18 @@ const sumbitAcessesHandler=(e)=>{
        Email:email,
       Password: pwd,
         
-      })
+      },config)
       .then(res => {
-        console.log(res.data)
+        if(res.data){
+          console.log(res)
+          props.logIn(res.data)
+        }
 })
 }
       
     //   .catch(error =>
     //     { console.error(`invalid credentials`)
-    // });
+    // });W
   
  
     return (
@@ -68,7 +79,7 @@ const sumbitAcessesHandler=(e)=>{
          
         </div>
         <div>
-          <form method="post" action="/Login"
+          <form 
         >
             {/* <span>Username</span> */}
             <label className="label" for="uname">
@@ -119,7 +130,7 @@ const sumbitAcessesHandler=(e)=>{
               <a href="#">Forgot password?</a>
             </div>
 
-            <button type="submit" >LOGIN</button>
+            <button type="submit" onClick={sumbitAcessesHandler} >LOGIN</button>
           </form>
         </div>
       </div>

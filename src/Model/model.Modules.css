@@ -57,7 +57,7 @@ table {
   border-collapse: collapse;
 }
 
-form {
+form.cform {
   display: flex;
   /* gap: 5px; */
   font-size: 0.8rem;
