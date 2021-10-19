@@ -12,7 +12,7 @@ const System = () => {
     <>
       <div className="tablecontainer">
         <h3>System Threshold </h3>
-        <form>
+        <form className="cform">
           <table>
             <thead>
               <tr>

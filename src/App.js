@@ -1,5 +1,6 @@
 import "./App.css";
 // import Button from "@mui/material/Button";
+import { Redirect } from "react-router-dom";
 import { Grid, Button, InputBase, Appbar, AppBar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { styled, alpha } from "@mui/material/styles";
@@ -16,6 +17,7 @@ import { BrowserRouter as Router,Switch,Route } from "react-router-dom";
 import Modelstatuslist from "./Model/Modelstatuslist";
 import Login from "./login/Login";
 import Helper from "./Components/Helper"
+import {useState,useEffect} from 'react'
 const useStyles = makeStyles({
   searchStyles: {
     border: "1px solid #E2E0E1",
@@ -47,54 +49,58 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 function App() {
   const classes = useStyles();
-
-  return (
-    <Grid container className="App">
-      <Grid item xs={12} sx={{ border: "2px solid black", height: "100px" }}>
-        <AppBar className="top-grid">
-          <div className="logos">
-            <img
-              src={appsteklogo}
-              alt="appstek-logo"
-              className="appstek-logo"
-            />
-            <img src={nfpc} alt="logo" className="nfpc-logo" />
-          </div>
-          <div className="search-icons">
-            <SearchIcon />
-            <InputBase
-              className={classes.searchStyles}
-              placeholder="Search…"
-            ></InputBase>
-            <NotificationsOutlinedIcon
-              className={classes.IconStyles + ` icon-not`}
-            />
-            <PersonOutlineOutlinedIcon
-              className={classes.IconStyles + ` icon-not`}
-            />
-            <PowerSettingsNewOutlinedIcon
-              className={classes.IconStyles + ` icon-not`}
-            />
-          </div>
-        </AppBar>
-      </Grid>
-      <Router>
-      <Grid xs={1.4} className="nav-tab">
-        <Sidenav />
-      </Grid>
-      <Grid xs={10.6} className="nav-content">
-      <Route exact={true} path="/">
-        <Dashboard />
-        </Route>
-        <Route path="/Configuration">
-        <Modelstatuslist/>
-        </Route>
-        <Route path="/help">
-        <Login/>
-        </Route>
-      </Grid>
-      </Router>
-    </Grid>
+  const [isLoggedIn,setIsLoggedIn] = useState(false)
+  const isLogedHandler = (val)=>{
+    setIsLoggedIn(val)
+  }
+ const x = isLoggedIn?<><Grid container className="App" spacing={2}>
+ <Grid item xs={12} sx={{ border: "2px solid black", height: "100px" }}>
+   <AppBar className="top-grid">
+     <div className="logos">
+       <img
+         src={appsteklogo}
+         alt="appstek-logo"
+         className="appstek-logo"
+       />
+       <img src={nfpc} alt="logo" className="nfpc-logo" />
+     </div>
+     <div className="search-icons">
+       <SearchIcon />
+       <InputBase
+         className={classes.searchStyles}
+         placeholder="Search…"
+       ></InputBase>
+       <NotificationsOutlinedIcon
+         className={classes.IconStyles + ` icon-not`}
+       />
+       <PersonOutlineOutlinedIcon
+         className={classes.IconStyles + ` icon-not`}
+       />
+       <PowerSettingsNewOutlinedIcon
+         className={classes.IconStyles + ` icon-not`}
+       />
+     </div>
+   </AppBar>
+ </Grid>
+ <Router>
+ <Grid xs={1} className="nav-tab">
+   <Sidenav />
+ </Grid>
+ <Grid xs={11} className="nav-content">
+ <Route exact={true} path="/">
+   <Dashboard />
+   </Route>
+   <Route path="/Configuration">
+   <Modelstatuslist/>
+   </Route>
+   <Route path="/help">
+   <Login logIn={isLogedHandler}/>
+   </Route>
+ </Grid>
+ </Router>
+</Grid></>:<Login logIn={isLogedHandler}/>
+  return(
+    x
   );
 }
 

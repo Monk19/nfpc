@@ -35,6 +35,9 @@ function Dashboard() {
     "Foreign Particles": "",
     All: "",
   });
+ 
+ 
+ 
   const defectTypes_Count = useSelector((state) => state.dataset.typeA);
   console.log(defectTypes_Count);
   const config = {
@@ -70,7 +73,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <Grid container xs={12}>
+    <Grid container xs={12} >
       <Grid xs={12}>
         <Paper elevation={3} className="form">
           <div>
@@ -169,14 +172,14 @@ function Dashboard() {
         </Paper>
       </Grid>
 
-      <Grid xs={6}>
+      <Grid xs={4} >
         <Paper className="bar-chart" onClick={changeToTableHandler}>
           <DynamicChart />
         </Paper>
       </Grid>
       {table ? (
         <>
-          <Grid xs={2}>
+          <Grid xs={4}>
             <Paper className="bar-chart ">
               <PieChart />
             </Paper>

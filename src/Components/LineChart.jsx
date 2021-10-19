@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 const LineChart = () => {
   const defectTypesAndCount = useSelector(state => state.dataset.typeA)
+  console.log(defectTypesAndCount)
   const lables = []
   const dataset = []
   const clrs= []

@@ -11,12 +11,28 @@ app.use(
     extended: true,
   })
 );
-const db = new sqlite3.Database("./db/nfpcdb.db", (err) => {
+const db = new sqlite3.Database("./db/newdb.db", (err) => {
   if (err) {
     console.log(err);
   }
   console.log("Connected to db");
 });
+
+app.post('/Login', function (req, res) {
+  db.get('SELECT * FROM Userlogins where EmailID=? and Password=?', [req.body.Email,req.body.Password], function(err, rows){ 
+
+    try{
+      if(rows.EmailID == req.body.Email && rows.Password==req.body.Password){
+        console.log(rows)
+        res.send(true)
+        return
+      }
+    }catch(err){
+      console.log(err)
+    } 
+
+})
+})
 
 app.get("/data", (req, res) => {
   const defectTypes_Count = [];
@@ -554,5 +570,5 @@ app.post("/data/filter", (req, res) => {
 //   console.log(t01end-t01)
 
 app.listen(port, () => {
-  console.log("Server is running at http://localhost:3000/");
-});
+  console.log(`Server is running at http://localhost:${port}`);
+})

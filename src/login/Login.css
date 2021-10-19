@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-body{
-   
- 
-  flex: 1;
-  margin:0;
- 
-}
+
 .div-login {
   background-image: url("./background.png");
   width:100vw;
@@ -108,7 +102,7 @@ font-weight: bold;
  
 }
 
-button {
+button.login-btn {
   /* width: 100%;
     margin: 5px 0;
     background-color: dodgerblue;
@@ -120,7 +114,7 @@ button {
     border-radius: 5px; */
   /* top: 668px;
   left: 748px; */
-  width: 22vw;
+  width: 22vw !important;
   height: 5vh;
   background: #0f206c 0% 0% no-repeat padding-box;
   color: white;
