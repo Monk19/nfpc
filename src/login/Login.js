@@ -130,7 +130,7 @@ const sumbitAcessesHandler=(e)=>{
               <a href="#">Forgot password?</a>
             </div>
 
-            <button type="submit" onClick={sumbitAcessesHandler} >LOGIN</button>
+            <button type="submit" onClick={sumbitAcessesHandler} className="login-btn" >LOGIN</button>
           </form>
         </div>
       </div>

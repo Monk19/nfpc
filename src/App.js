@@ -53,7 +53,7 @@ function App() {
   const isLogedHandler = (val)=>{
     setIsLoggedIn(val)
   }
- const x = isLoggedIn?<><Grid container className="App">
+ const x = isLoggedIn?<><Grid container className="App" spacing={2}>
  <Grid item xs={12} sx={{ border: "2px solid black", height: "100px" }}>
    <AppBar className="top-grid">
      <div className="logos">
@@ -83,10 +83,10 @@ function App() {
    </AppBar>
  </Grid>
  <Router>
- <Grid xs={1.4} className="nav-tab">
+ <Grid xs={1} className="nav-tab">
    <Sidenav />
  </Grid>
- <Grid xs={10.6} className="nav-content">
+ <Grid xs={11} className="nav-content">
  <Route exact={true} path="/">
    <Dashboard />
    </Route>

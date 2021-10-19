@@ -1,6 +1,6 @@
-import * as React from "react";
+import  React,{useState,useEffect} from "react";
 import { DataGrid } from "@mui/x-data-grid";
-
+import {useSelector} from 'react-redux'
 const columns = [
   { field: "id", headerName: "s.No", width: 70 },
   {
@@ -9,15 +9,15 @@ const columns = [
     type: "number",
     width: 130,
   },
-  { field: "Scratch", headerName: "Scratch", type: "number", width: 130 },
+  { field: "Scratches", headerName: "Scratches", type: "number", width: 130 },
   {
-    field: "discoloration",
-    headerName: "Discoloration",
+    field: "Discoloration",
+    headerName: "discoloration",
     type: "number",
     width: 130,
   },
   {
-    field: "foreignparticles",
+    field: "Foreign Particles",
     headerName: "Foreign Particles",
     type: "number",
     width: 130,
@@ -34,15 +34,15 @@ const rows = [
   },
   {
     id: 2,
-    totalbootles: 100,
     Scratch: 30,
+    totalbootles: 100,
     discoloration: 35,
     foreignparticles: 80,
   },
   {
     id: 3,
-    totalbootles: 100,
     Scratch: 120,
+    totalbootles: 100,
     discoloration: 35,
     foreignparticles: 80,
   },
@@ -71,23 +71,33 @@ const rows = [
     id: 7,
     totalbootles: 100,
     Scratch: 120,
-    discoloration: 35,
+    Discoloration: 35,
     foreignparticles: 80,
   },
   {
     id: 8,
     totalbootles: 100,
     Scratch: 30,
-    discoloration: 35,
     foreignparticles: 80,
+    Discoloration: 35,
   },
 ];
 
 export default function DefectLogTables() {
+  const [totalBottleCount,settotalBottleCount] = useState()
+  const  tbData =  useSelector((state) => state.dataset.typeA) 
+  
+ 
+  let x = {totalbootles:200,id:1}
+ for(const ele of tbData){
+ x = {...x,[ele.Defecttype]:ele.count,totalbootles:x.totalbootles+ele.count}
+    
+ }
+
   return (
     <div style={{ height: 400, width: "100%", backgroundColor: "white" }}>
       <DataGrid
-        rows={rows}
+        rows={[x]}
         columns={columns}
         pageSize={6}
         rowsPerPageOptions={[5]}
