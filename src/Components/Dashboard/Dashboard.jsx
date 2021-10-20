@@ -25,9 +25,12 @@ import "./Dashboard.modules.css";
 function Dashboard() {
   const [value, setValue] = useState({ fromd: "", tod: "" });
   const filterConditions = useSelector((state) => state.filter);
+  const [checkBox, setCheckBox] = useState(false)
+  const x = new Date()
+  let givenDate = `${x.getMonth()+1}/${x.getDate()}/${x.getDate()}`
   const [checkedValues, setCheckedValues] = useState({
-    fromDate: "",
-    toDate: "",
+    fromDate:givenDate,
+    toDate: givenDate,
     typeA: "",
     typeB: "",
     Scratches: "",
@@ -55,12 +58,15 @@ function Dashboard() {
   const applyFilterHandler = (e) => {
     dispatch(filterHandler({ ...checkedValues }));
     console.log(filterConditions);
-    console.log(checkedValues);
     axios.post("/data/filter", checkedValues, config).then((res) => {
       console.log(res.data);
       dispatch(defectSettingHandler({ typeA: res.data }));
     });
+
+ 
   };
+  
+
   useEffect(() => {
     axios.get("/data").then((res) => {
         const [typea, typeb] = res.data;
@@ -80,19 +86,19 @@ function Dashboard() {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
                 label="From Date"
-                value={value.fromd}
+                value={checkedValues.fromDate}
                 sx={{ backgroundColor: "black" }}
                 onChange={(value) => {
                   setValue((prev) => {
                     return { ...prev, fromd: value };
                   });
-                  setCheckedValues({ ...checkedValues, fromDate: value });
+                  setCheckedValues({ ...checkedValues, fromDate:`${value.getMonth()+1}/${value.getDate()}/${value.getDate()}` });
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
               <DatePicker
                 label="to"
-                value={value.tod}
+                value={checkedValues.toDate}
                 onChange={(value) => {
                   setValue((prev) => {
                     return { ...prev, tod: value };
@@ -106,7 +112,7 @@ function Dashboard() {
           <FormGroup className="checks">
             Bottle Types
             <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox color="secondary" />}
               label="TypeA"
               onChange={(e) => {
                 setCheckedValues((prev) => {

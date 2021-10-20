@@ -53,7 +53,7 @@ function App() {
   const isLogedHandler = (val)=>{
     setIsLoggedIn(val)
   }
- const x = isLoggedIn?<><Grid container className="App" spacing={2}>
+ const x = isLoggedIn?<><Grid container className="App">
  <Grid item xs={12} sx={{ border: "2px solid black", height: "100px" }}>
    <AppBar className="top-grid">
      <div className="logos">
@@ -94,7 +94,7 @@ function App() {
    <Modelstatuslist/>
    </Route>
    <Route path="/help">
-   <Login logIn={isLogedHandler}/>
+   <Helper/>
    </Route>
  </Grid>
  </Router>
