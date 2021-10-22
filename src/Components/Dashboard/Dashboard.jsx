@@ -80,11 +80,13 @@ function Dashboard() {
 
   return (
     <Grid container xs={12} >
+    <h1>Dashboard</h1>
       <Grid xs={12}>
         <Paper elevation={3} className="form">
           <div>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
+              className="dtpicker"
                 label="From Date"
                 value={checkedValues.fromDate}
                 sx={{ backgroundColor: "black" }}
@@ -99,6 +101,7 @@ function Dashboard() {
               <DatePicker
                 label="to"
                 value={checkedValues.toDate}
+                className="dtpicker"
                 onChange={(value) => {
                   setValue((prev) => {
                     return { ...prev, tod: value };
@@ -111,6 +114,7 @@ function Dashboard() {
           </div>
           <FormGroup className="checks">
             Bottle Types
+            <div>
             <FormControlLabel
               control={<Checkbox color="secondary" />}
               label="TypeA"
@@ -129,9 +133,11 @@ function Dashboard() {
                 });
               }}
             />
+            </div>
           </FormGroup>
           <FormGroup className="checks">
             <span> Defect Types</span>
+            <div>
             <FormControlLabel
               control={<Checkbox />}
               label="Scratch"
@@ -171,8 +177,9 @@ function Dashboard() {
                 });
               }}
             />
+            </div>
           </FormGroup>
-          <Button type="submit" onClick={applyFilterHandler}>
+          <Button type="submit" className="submit-btn" onClick={applyFilterHandler} >
             Submit
           </Button>
         </Paper>
@@ -203,6 +210,7 @@ function Dashboard() {
           </Paper>
         </Grid>
       )}
+      
     </Grid>
   );
 }

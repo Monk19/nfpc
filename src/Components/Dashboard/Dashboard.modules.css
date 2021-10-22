@@ -1,26 +1,17 @@
 .form {
   margin: 30px 0px 0px 10px;
-  height: 169px;
-
-  /* width:100vw; */
+  
 }
 .MuiCalendarPicker-root {
   background-color: rgba(247, 244, 242, 0.808);
   box-shadow: 10px 10px 20px black;
-  margin-left: 200px;
+  margin: 30px 20px;
 }
-.MuiOutlinedInput-root {
-  /* width: 80%; */
-}
-.MuiFormGroup-root {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: stretch; */
-  /* width: 200px; */
-}
-/* .checks>label{
 
+/* .checks>label{
+.
 } */
+
 .bar-chart {
   height: 60vh;
   margin:10px ;
@@ -28,7 +19,15 @@
 .MuiIconButton-root{
   width:14px;
 }
-
-.MuiFormControlLabel-root{
-  display: inline-block;
+.checks {
+  display: flex !important;
+  flex-direction: row;
+  display:block;
 }
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root{
+margin:0px 10px !important;
+}
+h1{
+  margin:0px 10px;
+}
+
