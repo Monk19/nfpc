@@ -23,14 +23,24 @@ const db = new sqlite3.Database("./db/nfpc.db", (err) => {
   }
   console.log("Connected to db");
 });
-
+let userMail
 app.post('/Login', function (req, res) {
   db.get('SELECT * FROM Userlogins where Email_Id=? and Password=?', [req.body.Email,req.body.Password], function(err, rows){ 
 
     try{
       if(rows.Email_Id == req.body.Email && rows.Password==req.body.Password){
         console.log(rows)
+        userMail=rows.Email_Id
         res.send(true)
+        const d = new Date()
+        const hrs = d.getHours()
+        const mins= d.getMinutes()
+        const millsec = d.getMilliseconds()
+        console.log(userMail)
+        const updateLogger = `UPDATE Userlogins SET Login_Time=? Where Email_Id=?`
+        db.run(updateLogger,[`${hrs}-${mins}-${millsec}`,userMail],()=>{
+          console.log("updated")
+        })
         return
       }
     }catch(err){
@@ -38,6 +48,9 @@ app.post('/Login', function (req, res) {
     } 
 
 })
+})
+app.post('/logout',function(req,res){
+
 })
 
 
