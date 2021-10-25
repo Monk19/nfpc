@@ -12,11 +12,11 @@ const Render = (props) => {
   };
   return (
     <tr>
-      <td> {props.sno + 1}</td>
-      <td>{props.contact.Model}</td>
-      <td>{props.contact.Version}</td>
-      <td>{props.contact.LastUpdate}</td>
-      <td>
+      <td className="td"> {props.itm.Sl_No }</td>
+      <td className="td">{props.itm.Model}</td>
+      <td className="td">{props.itm.Version}</td>
+      <td className="td">{props.itm.Last_Update}</td>
+      <td className="td">
         {/* {props.contact.Status} */}
 
         {update ? (

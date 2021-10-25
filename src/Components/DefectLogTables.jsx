@@ -90,7 +90,7 @@ export default function DefectLogTables() {
  
   let x = {totalbootles:200,id:1}
  for(const ele of tbData){
- x = {...x,[ele.Defecttype]:ele.count,totalbootles:x.totalbootles+ele.count}
+ x = {...x,[ele.Defect_Type]:ele.count,totalbootles:x.totalbootles+ele.count}
     
  }
 
