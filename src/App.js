@@ -76,7 +76,7 @@ function App() {
        <PersonOutlineOutlinedIcon
          className={classes.IconStyles + ` icon-not`}
        />
-       <PowerSettingsNewOutlinedIcon
+       <PowerSettingsNewOutlinedIcon onClick={(e)=>{setIsLoggedIn(false)}}
          className={classes.IconStyles + ` icon-not`}
        />
      </div>

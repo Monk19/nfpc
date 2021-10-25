@@ -31,12 +31,12 @@ function Dashboard() {
   const [checkedValues, setCheckedValues] = useState({
     fromDate:givenDate,
     toDate: givenDate,
-    typeA: "",
-    typeB: "",
-    Scratches: "",
-    Discoloration: "",
-    "Foreign Particles": "",
-    All: "",
+    typeA:false,
+    typeB: false,
+    Scratches: false,
+    Discoloration: false,
+    "Foreign Particles": false,
+    All: false,
   });
  
  
@@ -120,7 +120,7 @@ function Dashboard() {
               label="TypeA"
               onChange={(e) => {
                 setCheckedValues((prev) => {
-                  return { ...prev, typeA: e.target.value };
+                  return { ...prev, typeA: !prev.typeA };
                 });
               }}
             />
@@ -129,7 +129,7 @@ function Dashboard() {
               label="TypeB"
               onChange={(e) => {
                 setCheckedValues((prev) => {
-                  return { ...prev, typeB: e.target.value };
+                  return { ...prev, typeB: !prev.typeB};
                 });
               }}
             />
@@ -144,7 +144,7 @@ function Dashboard() {
               onChange={(e) => {
                 console.log(e.target.value);
                 setCheckedValues((prev) => {
-                  return { ...prev, Scratches: e.target.value };
+                  return { ...prev, Scratches: !prev.Scratches};
                 });
               }}
             />
@@ -154,7 +154,7 @@ function Dashboard() {
               onChange={(e) => {
                 console.log(e);
                 setCheckedValues((prev) => {
-                  return { ...prev, "Foreign Particles": e.target.value };
+                  return { ...prev, "Foreign Particles": !prev["Foreign Particles"] };
                 });
               }}
             />
@@ -163,7 +163,7 @@ function Dashboard() {
               label="Discoloration"
               onChange={(e) => {
                 setCheckedValues((prev) => {
-                  return { ...prev, Discoloration: e.target.value };
+                  return { ...prev, Discoloration: !prev.Discoloration };
                 });
               }}
             />
