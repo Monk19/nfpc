@@ -8,7 +8,7 @@ const VerticalBar = () =>{
   const dataset = []
   const clrs= []
   defectTypesAndCount.map((ele,index)=>{
-    lables.push(ele.Defecttype)
+    lables.push(ele.Defect_Type)
     dataset.push(ele.count)
   })
   console.log(defectTypesAndCount)

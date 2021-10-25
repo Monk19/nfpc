@@ -2,8 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const sqlite3 = require("sqlite3");
+const fileUpload = require('express-fileupload');
 
 const port = process.env.PORT || 1919;
+app.use(express.static('public'))
+app.use(fileUpload());
 app.use(cors());
 app.use(express.json());
 app.use(
@@ -11,7 +14,10 @@ app.use(
     extended: true,
   })
 );
-const db = new sqlite3.Database("./db/newdb.db", (err) => {
+
+
+
+const db = new sqlite3.Database("./db/nfpc.db", (err) => {
   if (err) {
     console.log(err);
   }
@@ -19,10 +25,10 @@ const db = new sqlite3.Database("./db/newdb.db", (err) => {
 });
 
 app.post('/Login', function (req, res) {
-  db.get('SELECT * FROM Userlogins where EmailID=? and Password=?', [req.body.Email,req.body.Password], function(err, rows){ 
+  db.get('SELECT * FROM Userlogins where Email_Id=? and Password=?', [req.body.Email,req.body.Password], function(err, rows){ 
 
     try{
-      if(rows.EmailID == req.body.Email && rows.Password==req.body.Password){
+      if(rows.Email_Id == req.body.Email && rows.Password==req.body.Password){
         console.log(rows)
         res.send(true)
         return
@@ -34,10 +40,101 @@ app.post('/Login', function (req, res) {
 })
 })
 
+
+// below is for upload model
+
+app.post('/uploadfile', (req, res) => {
+  
+  if (!req.files) { 
+      return res.status(500).send({ msg: "file is not found" })
+  }
+
+  const myFile = req.files.file;
+  // Use the mv() method to place the file somewhere on your server
+  myFile.mv(`${__dirname}/public/${myFile.name}`, function (err) {
+      if (err) {
+          console.log(err)
+          return res.status(500).send({ msg: "error" });
+      }
+      return res.send({ file: myFile.name, path: `/${myFile.name}`, ty: myFile.type });
+  });
+}) 
+// above is for upload model
+
+// upload data in model status in below
+app.post('/upload', function (req,res) {
+
+  let date = new Date().getDate() +  "/" +    (new Date().getMonth() + 1) +    "/" +    new Date().getFullYear()
+  
+  db.run(`insert into Modelstatuslist(Model,Version,Last_Update,Status) values(?,?,?,"inactive")`,[req.body.value,req.body.version,date], function(err,uploadata) {
+    if (err) {
+      return console.log(err.message);
+    }
+    
+    if(uploadata){
+   return console.log(uploadata);
+    }
+  //  res.send();
+  });
+  });
+  // upload data in model status in above
+
+  
+// edit data in system thershold in below
+app.post('/edit' , function(req,res){
+  let data = [req.body.editvalue,req.body.store];
+  let sql = `UPDATE SystemThreshold SET Score = ? WHERE Score = ?`;
+
+    db.run(sql, data, function(err,edit){
+    if (err) {
+      return console.error(err.message);
+    }
+    if(edit)
+    {return console.log(edit);}
+  
+  });
+  });
+  
+  // edit data in system thershold in above
+
+// system threshold table renedering
+app.get('/table',  (req, res) => {
+  let sql = `SELECT * from SystemThreshold`;
+  // let Sno = ;
+  // console.log(sql);
+  
+  // first row only
+  db.all(sql, (err, rows) => {
+    if (err) {
+      throw err;
+    }
+  res.send(rows);
+  });
+  });
+// system threshold table renedering
+
+
+//model status table rendering
+app.get('/status',  (req, res) => {
+  let sql = `SELECT * from Modelstatuslist`;
+  
+  // first row only
+  db.all(sql, (err, rowm) => {
+    if (err) {
+      
+      throw err;
+    }
+  
+    res.send(rowm);
+    
+  });
+  });
+//model status table rendering
+
 app.get("/data", (req, res) => {
   const defectTypes_Count = [];
-  const sql1 = `SELECT Defecttype,count(*) as count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype`;
-  const sql = `SELECT Defecttype,count(*) as count FROM Defectlog WHERE Bottletype=? GROUP BY Defecttype`;
+  const sql1 = `SELECT Defect_Type,count(*) as count FROM Defectlog WHERE Bottle_Type=? GROUP BY Defect_Type`;
+  const sql = `SELECT Defect_Type,count(*) as count FROM Defectlog WHERE Bottle_Type=? GROUP BY Defect_Type`;
 
   db.all(sql1, ["typeA"], (err, rows) => {
     if (err) {
@@ -53,7 +150,6 @@ app.get("/data", (req, res) => {
     res.send(defectTypes_Count);
   });
 });
-
 app.post("/data/filter", (req, res) => {
   let filters = [];
   let bottletypes = []
@@ -93,7 +189,7 @@ app.post("/data/filter", (req, res) => {
   console.log(bottletypes)
 
   console.log(filters);
-  let sqlString = `SELECT Defecttype,COUNT(*) as count FROM Defectlog WHERE Bottletype IN (?,?) AND Defecttype IN (?,?,?) GROUP BY Defecttype;`
+  let sqlString = `SELECT Defect_Type,COUNT(*) as count FROM Defectlog WHERE Bottle_Type IN (?,?) AND Defect_Type IN (?,?,?) GROUP BY Defect_Type;`
 
   db.all(sqlString,bottletypes,(err,rows)=>{
     if(err){

@@ -47,3 +47,8 @@ div.search-icons {
   background-color: #eeeeee;
   width: 100%;
 }
+a{
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}

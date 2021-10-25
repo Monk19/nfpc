@@ -31,12 +31,12 @@ function Dashboard() {
   const [checkedValues, setCheckedValues] = useState({
     fromDate:givenDate,
     toDate: givenDate,
-    typeA: "",
-    typeB: "",
-    Scratches: "",
-    Discoloration: "",
-    "Foreign Particles": "",
-    All: "",
+    typeA:false,
+    typeB: false,
+    Scratches: false,
+    Discoloration: false,
+    "Foreign Particles": false,
+    All: false,
   });
  
  
@@ -80,11 +80,13 @@ function Dashboard() {
 
   return (
     <Grid container xs={12} >
+    <h1>Dashboard</h1>
       <Grid xs={12}>
         <Paper elevation={3} className="form">
           <div>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
+              className="dtpicker"
                 label="From Date"
                 value={checkedValues.fromDate}
                 sx={{ backgroundColor: "black" }}
@@ -99,6 +101,7 @@ function Dashboard() {
               <DatePicker
                 label="to"
                 value={checkedValues.toDate}
+                className="dtpicker"
                 onChange={(value) => {
                   setValue((prev) => {
                     return { ...prev, tod: value };
@@ -111,12 +114,13 @@ function Dashboard() {
           </div>
           <FormGroup className="checks">
             Bottle Types
+            <div>
             <FormControlLabel
               control={<Checkbox color="secondary" />}
               label="TypeA"
               onChange={(e) => {
                 setCheckedValues((prev) => {
-                  return { ...prev, typeA: e.target.value };
+                  return { ...prev, typeA: !prev.typeA };
                 });
               }}
             />
@@ -125,20 +129,22 @@ function Dashboard() {
               label="TypeB"
               onChange={(e) => {
                 setCheckedValues((prev) => {
-                  return { ...prev, typeB: e.target.value };
+                  return { ...prev, typeB: !prev.typeB};
                 });
               }}
             />
+            </div>
           </FormGroup>
           <FormGroup className="checks">
             <span> Defect Types</span>
+            <div>
             <FormControlLabel
               control={<Checkbox />}
               label="Scratch"
               onChange={(e) => {
                 console.log(e.target.value);
                 setCheckedValues((prev) => {
-                  return { ...prev, Scratches: e.target.value };
+                  return { ...prev, Scratches: !prev.Scratches};
                 });
               }}
             />
@@ -148,7 +154,7 @@ function Dashboard() {
               onChange={(e) => {
                 console.log(e);
                 setCheckedValues((prev) => {
-                  return { ...prev, "Foreign Particles": e.target.value };
+                  return { ...prev, "Foreign Particles": !prev["Foreign Particles"] };
                 });
               }}
             />
@@ -157,7 +163,7 @@ function Dashboard() {
               label="Discoloration"
               onChange={(e) => {
                 setCheckedValues((prev) => {
-                  return { ...prev, Discoloration: e.target.value };
+                  return { ...prev, Discoloration: !prev.Discoloration };
                 });
               }}
             />
@@ -171,8 +177,9 @@ function Dashboard() {
                 });
               }}
             />
+            </div>
           </FormGroup>
-          <Button type="submit" onClick={applyFilterHandler}>
+          <Button type="submit" className="submit-btn" onClick={applyFilterHandler} >
             Submit
           </Button>
         </Paper>
@@ -203,6 +210,7 @@ function Dashboard() {
           </Paper>
         </Grid>
       )}
+      
     </Grid>
   );
 }
