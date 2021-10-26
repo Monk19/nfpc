@@ -30,15 +30,18 @@ app.post('/Login', function (req, res) {
     try{
       if(rows.Email_Id == req.body.Email && rows.Password==req.body.Password){
         console.log(rows)
-        userMail=rows.Email_Id
+         userMail=rows.Email_Id;
         res.send(true)
         const d = new Date()
         const hrs = d.getHours()
         const mins= d.getMinutes()
         const millsec = d.getMilliseconds()
+        const dt = d.getDate()
+        const mnth = d.getMonth()
+        const yer = d.getFullYear()
         console.log(userMail)
-        const updateLogger = `UPDATE Userlogins SET Login_Time=? Where Email_Id=?`
-        db.run(updateLogger,[`${hrs}-${mins}-${millsec}`,userMail],()=>{
+        const updateLogger = `UPDATE Userlogins SET Login_Time=?  Where Email_Id=?`
+        db.run(updateLogger,[`${hrs}:${mins}:${millsec} ${dt}-${mnth}-${yer}`,userMail],()=>{
           console.log("updated")
         })
         return
@@ -49,9 +52,25 @@ app.post('/Login', function (req, res) {
 
 })
 })
-app.post('/logout',function(req,res){
+app.get('/logout',function(req,res){
+  const d = new Date()
+  const hrs = d.getHours()
+  const mins= d.getMinutes()
+  const millsec = d.getMilliseconds()
+  const dt = d.getDate()
+        const mnth = d.getMonth()
+        const yer = d.getFullYear()
+  if(userMail){
+    const updateLogger = `UPDATE Userlogins SET Logout_Time=? Where Email_Id=?`
+    db.run(updateLogger,[`${hrs}:${mins}:${millsec} ${dt}-${mnth}-${yer}`,userMail],()=>{
+      console.log("updated")
+    })
+    res.send(true)
+}
 
+ userMail=""
 })
+
 
 
 // below is for upload model

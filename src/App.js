@@ -18,6 +18,7 @@ import Modelstatuslist from "./Model/Modelstatuslist";
 import Login from "./login/Login";
 import Helper from "./Components/Helper"
 import {useState,useEffect} from 'react'
+import axios from "axios";
 const useStyles = makeStyles({
   searchStyles: {
     border: "1px solid #E2E0E1",
@@ -47,11 +48,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
 function App() {
   const classes = useStyles();
   const [isLoggedIn,setIsLoggedIn] = useState(false)
   const isLogedHandler = (val)=>{
     setIsLoggedIn(val)
+  }
+  const LogoutHandler = ()=>{
+    axios.get('/logout').then(res=>{
+    console.log(res)
+    setIsLoggedIn(!res.data)
+    })
+   
   }
  const x = isLoggedIn?<><Grid container className="App">
  <Grid item xs={12} sx={{ border: "2px solid black", height: "100px" }}>
@@ -76,7 +85,7 @@ function App() {
        <PersonOutlineOutlinedIcon
          className={classes.IconStyles + ` icon-not`}
        />
-       <PowerSettingsNewOutlinedIcon onClick={(e)=>{setIsLoggedIn(false)}}
+       <PowerSettingsNewOutlinedIcon onClick={(e)=>{LogoutHandler()}}
          className={classes.IconStyles + ` icon-not`}
        />
      </div>
