@@ -1,6 +1,5 @@
 import "./App.css";
 // import Button from "@mui/material/Button";
-import { Redirect } from "react-router-dom";
 import { Grid, Button, InputBase, Appbar, AppBar } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { styled, alpha } from "@mui/material/styles";
@@ -13,12 +12,13 @@ import Sidenav from "./Components/Sidenav/Sidenav";
 import SearchIcon from "@mui/icons-material/Search";
 import Dashboard from "../src/Components/Dashboard/Dashboard";
 import DefectLogTables from "./Components/DefectLogTables";
-import { BrowserRouter as Router,Switch,Route } from "react-router-dom";
+import { BrowserRouter as Router,Switch,Route,useHistory ,Redirect} from "react-router-dom";
 import Modelstatuslist from "./Model/Modelstatuslist";
 import Login from "./login/Login";
 import Helper from "./Components/Helper"
 import {useState,useEffect} from 'react'
 import axios from "axios";
+
 const useStyles = makeStyles({
   searchStyles: {
     border: "1px solid #E2E0E1",
@@ -50,6 +50,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 function App() {
+  const history = useHistory()
   const classes = useStyles();
   const [isLoggedIn,setIsLoggedIn] = useState(false)
   const isLogedHandler = (val)=>{
@@ -60,6 +61,7 @@ function App() {
     console.log(res)
     setIsLoggedIn(!res.data)
     })
+   
    
   }
  const x = isLoggedIn?<><Grid container className="App">
@@ -104,6 +106,9 @@ function App() {
    </Route>
    <Route path="/help">
    <Helper/>
+   </Route>
+   <Route path="/login">
+     <Login/>
    </Route>
  </Grid>
  </Router>

@@ -27,7 +27,7 @@ function Dashboard() {
   const filterConditions = useSelector((state) => state.filter);
   const [checkBox, setCheckBox] = useState(false)
   const x = new Date()
-  let givenDate = `${x.getMonth()+1}/${x.getDate()}/${x.getDate()}`
+  let givenDate = `${x.getMonth()+1}/${x.getDate()}/${x.getFullYear()}`
   const [checkedValues, setCheckedValues] = useState({
     fromDate:givenDate,
     toDate: givenDate,
