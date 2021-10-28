@@ -3,14 +3,12 @@ import { Redirect } from "react-router-dom";
 // import {ReactComponent as Logo} from '../../assets/instagram.svg'
 import appsteklogo from "./appsteklogo.svg";
 import nfpclogo from "./nfpclogo.png";
-import axios from 'axios';
+import axios from "axios";
 import "./Login.css";
-const  Login  = (props) => {
-  const [email, setemail] =useState("");
+const Login = (props) => {
+  const [email, setemail] = useState("");
   const [pwd, setpwd] = useState("");
-  const [isLogged,setisLogged] = useState(false)
-   
-
+  const [isLogged, setisLogged] = useState(false);
 
   // handleChange = (e) => {
   //   const { name, value } = e.target;
@@ -20,26 +18,24 @@ const  Login  = (props) => {
   //   fetchLogin()
   // }, [])
 
+  // const handleSubmit = (e) => {
 
-      // const handleSubmit = (e) => {
- 
- 
-    //    // Send POST request to 'books/create' endpoint
-    // axios
-    //   .post('http://localhost:4001/login/all', {
-    //     Username:email,
-    //     password: pwd,
-        
-    //   })
-    //   .then(res => {
-    //     console.log(res.data)
-        // e.preventDefault();
-        // props.isLogin(true);
-        // Fetch all books to refresh
-        // the books on the bookshelf list
-      
-      // })
-      // .catch(error => console.error(`invalid credentials`))
+  //    // Send POST request to 'books/create' endpoint
+  // axios
+  //   .post('http://localhost:4001/login/all', {
+  //     Username:email,
+  //     password: pwd,
+
+  //   })
+  //   .then(res => {
+  //     console.log(res.data)
+  // e.preventDefault();
+  // props.isLogin(true);
+  // Fetch all books to refresh
+  // the books on the bookshelf list
+
+  // })
+  // .catch(error => console.error(`invalid credentials`))
   // };
   const config = {
     headers: {
@@ -48,39 +44,43 @@ const  Login  = (props) => {
     },
   };
 
-const sumbitAcessesHandler=(e)=>{
-  e.preventDefault()
-  axios
-      .post('/Login', {
-       Email:email,
-      Password: pwd,
-        
-      },config)
-      .then(res => {
-        if(res.data){
-          console.log(res)
-          props.logIn(res.data)
+  const sumbitAcessesHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post(
+        "/Login",
+        {
+          Email: email,
+          Password: pwd,
+        },
+        config
+      )
+      .then((res) => {
+        if (res.data) {
+          console.log(res);
+          setisLogged(res.data);
+          props.logIn(res.data);
         }
-})
-}
-      
-    //   .catch(error =>
-    //     { console.error(`invalid credentials`)
-    // });W
-  
- 
-    return (
-      
+      });
+  };
+
+  //   .catch(error =>
+  //     { console.error(`invalid credentials`)
+  // });W
+
+  return (
     <div className="body">
       <div className="div-login">
         <div className="div-login-logo">
-        <a><img src={appsteklogo} style={{height: "8vh", width: "8vw"}}/></a>
-         <a><img src={nfpclogo} style={{height: "8vh", width: "6vw"}}/></a>
-         
+          <a>
+            <img src={appsteklogo} style={{ height: "8vh", width: "8vw" }} />
+          </a>
+          <a>
+            <img src={nfpclogo} style={{ height: "8vh", width: "6vw" }} />
+          </a>
         </div>
         <div>
-          <form 
-        >
+          <form>
             {/* <span>Username</span> */}
             <label className="label" for="uname">
               User Name
@@ -125,18 +125,24 @@ const sumbitAcessesHandler=(e)=>{
             {/* </div> */}
             <div className="remember">
               <a>
-                <input className="checkbox" type="checkbox" name="remember" /><label for="checkbox" >Remember Me</label>
+                <input className="checkbox" type="checkbox" name="remember" />
+                <label for="checkbox">Remember Me</label>
               </a>
               <a href="#">Forgot password?</a>
             </div>
 
-            <button type="submit" onClick={sumbitAcessesHandler} className="login-btn" >LOGIN</button>
+            <button
+              type="submit"
+              onClick={sumbitAcessesHandler}
+              className="login-btn"
+            >
+              LOGIN
+            </button>
           </form>
         </div>
       </div>
     </div>
-    );
- 
+  );
 };
 
 export default Login;
